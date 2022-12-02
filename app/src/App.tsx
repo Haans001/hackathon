@@ -1,12 +1,12 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 import { ChakraProvider, theme, Flex } from '@chakra-ui/react'
+import { Navbar } from './components/'
 
 function App() {
     return (
         <ChakraProvider theme={theme}>
-            <Flex></Flex>
+            <Navbar></Navbar>
         </ChakraProvider>
     )
 }
