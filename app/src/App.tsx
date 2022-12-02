@@ -9,12 +9,13 @@ function App() {
     return (
         <BrowserRouter>
             <ChakraProvider theme={theme}>
-                <RegisterForm />
-
                 <Navbar></Navbar>
                 <Routes>
-                    <Route element={<LoginForm />} path='/login'></Route>
-                    <Route element={<RegisterForm />} path='/register'></Route>
+                    <Route element={<LoginForm />} path='/logowanie'></Route>
+                    <Route
+                        element={<RegisterForm />}
+                        path='/rejestracja'
+                    ></Route>
                 </Routes>
             </ChakraProvider>
         </BrowserRouter>
