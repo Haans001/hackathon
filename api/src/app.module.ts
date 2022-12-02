@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { OrganisationsModule } from './organisations/organisations.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TicketModule } from './ticket/ticket/ticket.module';
 
@@ -11,6 +12,7 @@ import { TicketModule } from './ticket/ticket/ticket.module';
     TicketModule,
     AuthModule,
     PrismaModule,
+    OrganisationsModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
