@@ -1,18 +1,20 @@
-import React from 'react'
-import './App.css'
-import { ChakraProvider, theme, Flex } from '@chakra-ui/react'
-import { Navbar } from './components/'
-import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import { ChakraProvider, theme } from "@chakra-ui/react";
+import { BrowserRouter, Routes } from "react-router-dom";
+import "./App.css";
+import { Navbar } from "./components/";
+import LoginForm from "./components/LoginForm";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <ChakraProvider theme={theme}>
-                <Navbar></Navbar>
-                <Routes>{/* <Route element={} path='/'></Route> */}</Routes>
-            </ChakraProvider>
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <LoginForm />
+
+        <Navbar></Navbar>
+        <Routes>{/* <Route element={} path='/'></Route> */}</Routes>
+      </ChakraProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
