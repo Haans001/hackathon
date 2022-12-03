@@ -6,95 +6,18 @@ import CreateOrganisation from "./components/CreateOrganisation";
 import Dashboard from "./components/Dashboard";
 import LoginForm from "./components/LoginForm";
 import Page404 from "./components/Page404";
+import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import RegisterForm from "./components/RegisterForm";
 import Tickets from "./components/Tickets";
 import WelcomePage from "./components/WelcomePage";
 import { AuthProvider } from "./providers/AuthProvider";
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
-    let loggedIn: boolean = false
+  let loggedIn: boolean = false;
 
-<<<<<<< HEAD
-    return (
-        <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-                <BrowserRouter>
-                    <ChakraProvider theme={theme}>
-                        <Routes>
-                            <Route
-                                element={
-                                    <PublicRoute>
-                                        <LoginForm />
-                                    </PublicRoute>
-                                }
-                                path='/logowanie'
-                            />
-                            <Route
-                                element={
-                                    <PublicRoute>
-                                        <RegisterForm />
-                                    </PublicRoute>
-                                }
-                                path='/rejestracja'
-                            />
-                            <Route
-                                element={
-                                    <PublicRoute>
-                                        <WelcomePage />
-                                    </PublicRoute>
-                                }
-                                path='/'
-                            />
-                            <Route
-                                element={
-                                    <ProtectedRoute>
-                                        <div
-                                            style={{
-                                                paddingTop: '100px',
-                                            }}
-                                        >
-                                            <Dashboard></Dashboard>
-                                        </div>
-                                    </ProtectedRoute>
-                                }
-                                path='/panel'
-                            />
-                            <Route
-                                element={
-                                    <ProtectedRoute>
-                                        <Tickets />
-                                    </ProtectedRoute>
-                                }
-                                path='/zgloszenia'
-                            />
-                            <Route
-                                element={
-                                    <ProtectedRoute>
-                                        <CreateOrganisation />
-                                    </ProtectedRoute>
-                                }
-                                path='/stworz-organizacje'
-                            />
-                            <Route path='*' element={<Page404 />} />
-                            <Route
-                                path='/organizacja/:id'
-                                element={
-                                    <ProtectedRoute>
-                                        <UserSiteOrganisation />
-                                    </ProtectedRoute>
-                                }
-                            />
-                        </Routes>
-                    </ChakraProvider>
-                </BrowserRouter>
-            </AuthProvider>
-        </QueryClientProvider>
-    )
-=======
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -170,7 +93,6 @@ function App() {
       </AuthProvider>
     </QueryClientProvider>
   );
->>>>>>> e0b2dff (add profile-page)
 }
 
-export default App
+export default App;
