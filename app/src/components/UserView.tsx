@@ -76,12 +76,6 @@ interface TicketType {
 
 const UserView = () => {
   const {
-    isOpen: isAddTicketsModalOpen,
-    onClose: onAddTicketsModalClose,
-    onOpen: onAddTicketModalOpen,
-  } = useDisclosure();
-
-  const {
     isOpen: isAddUserModalOpen,
     onClose: onAddUserModalClose,
     onOpen: onAddUserModalOpen,
@@ -90,6 +84,16 @@ const UserView = () => {
   const params = useParams();
 
   const { user } = useAuth();
+
+  const {
+    isOpen: isAddTicketsModalOpen,
+    onClose: onAddTicketsModalClose,
+    onOpen: onAddTicketModalOpen,
+  } = useDisclosure({
+    onClose: () => {
+      refetch();
+    },
+  });
 
   const { data, refetch } = useQuery("organisation", () =>
     axios.get(`/organisations/${params.id}`)

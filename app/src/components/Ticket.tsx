@@ -22,7 +22,7 @@ const Ticket = (props: any) => {
 
   return (
     <Flex justify={"center"}>
-      <Card width={"50%"}>
+      <Card width={"70%"}>
         <CardBody>
           <Flex
             h={"100%"}
