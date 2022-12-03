@@ -47,6 +47,7 @@ export class OrganisationsService {
             startTime: true,
             endTime: true,
             title: true,
+            approved: true,
             id: true,
             user: {
               select: {
@@ -55,6 +56,9 @@ export class OrganisationsService {
                 surname: true,
               },
             },
+          },
+          orderBy: {
+            createdAt: 'desc',
           },
         },
         users: {

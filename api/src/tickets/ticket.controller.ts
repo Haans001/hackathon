@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { HttpCode } from '@nestjs/common/decorators';
+import { HttpCode, Put } from '@nestjs/common/decorators';
 import { HttpStatus } from '@nestjs/common/enums';
 import { GetCurrentUser } from 'src/common/decorators';
-import { TicketDto } from './dto';
+import { ApproveOrDisapproveTicketDto, TicketDto } from './dto';
 import { TicketService } from './ticket.service';
 
 @Controller('tickets')
@@ -20,5 +20,13 @@ export class TicketController {
   @Get('getUserTickets')
   async GetTickets(@GetCurrentUser('sub') userId: number) {
     return await this.ticketService.getUserTickets(userId);
+  }
+
+  @Put('approveOrDisapproveTicket')
+  async approveOrDisapproveTicket(@Body() data: ApproveOrDisapproveTicketDto) {
+    return await this.ticketService.approveOrDisapproveTicket(
+      data.ticketId,
+      data.status,
+    );
   }
 }
