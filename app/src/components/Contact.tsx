@@ -107,7 +107,7 @@ const Contact = () => {
                                 </FormControl>
 
                                 <Button
-                                    colorScheme='blue'
+                                    colorScheme='purple'
                                     bg='purple.600'
                                     color='white'
                                     _hover={{

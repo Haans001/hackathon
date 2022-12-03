@@ -36,12 +36,12 @@ const Ticket = (props: any) => {
     ).length
 
     const hasVotedPlus = props.votes.find(
-        (vote: { userId: any; status: any }) =>
+        (vote: { userId: string; status: string }) =>
             vote.userId === user.id && vote.status
     )
 
     const hasVotedMinus = props.votes.find(
-        (vote: { userId: any; status: any }) =>
+        (vote: { userId: string; status: string }) =>
             vote.userId === user.id && !vote.status
     )
 
