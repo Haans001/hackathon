@@ -87,11 +87,7 @@ export class OrganisationsService {
         id: organisationId,
       },
       select: {
-        owner: {
-          select: {
-            id: true,
-          },
-        },
+        owner: true,
       },
     });
 
@@ -151,16 +147,31 @@ export class OrganisationsService {
             },
           },
         },
-        owner: {
-          select: {
-            name: true,
-            surname: true,
-            id: true,
+      },
+    });
+    return data;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  async UpvoteTicket(userid: number, ticketid: number, stat: boolean) {
+    await this.prisma.vote.create({
+      data: {
+        status: stat,
+        ticket: {
+          connect: {
+            id: ticketid,
+          },
+        },
+        user: {
+          connect: {
+            id: userid,
           },
         },
       },
     });
-
-    return data;
+    return this.prisma.vote.findMany({
+      where: {
+        ticketId: ticketid,
+      },
+    });
   }
 }

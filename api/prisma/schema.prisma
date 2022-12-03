@@ -21,6 +21,7 @@ model User {
   tickets       Ticket[]
   organisations OrganisationsOnUsers[]
   Organisation  Organisation[]
+  vote Vote[]
 }
 
 model Ticket {
@@ -34,6 +35,7 @@ model Ticket {
   user           User         @relation(fields: [userId], references: [id])
   organisationId Int
   organisation   Organisation @relation(fields: [organisationId], references: [id])
+  votes Vote []
 }
 
 model Organisation {
@@ -56,4 +58,13 @@ model OrganisationsOnUsers {
   updatedAt      DateTime     @updatedAt
 
   @@id([organisationId, userId])
+}
+
+model Vote{
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId],references: [id])
+  ticketId Int 
+  status Boolean
+  ticket Ticket @relation(fields: [ticketId],references: [id])
 }

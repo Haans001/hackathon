@@ -16,6 +16,7 @@ import { OrganisationsService } from './organisations.service';
 @Controller('organisations')
 export class OrganisationsController {
   constructor(private readonly organisationsService: OrganisationsService) {}
+
   @Post('create')
   @HttpCode(HttpStatus.CREATED)
   async create(
@@ -59,5 +60,13 @@ export class OrganisationsController {
       data.organisationId,
     );
     return organisation;
+  }
+
+  @Post('upvote')
+  async upvote(
+    @GetCurrentUser('sub') userId: number,
+    @Body('ticketId') ticketId: number,
+  ) {
+    return await this.organisationsService.UpvoteTicket(userId, ticketId);
   }
 }
