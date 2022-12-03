@@ -8,7 +8,7 @@ import {
     Stack,
     useColorModeValue,
 } from '@chakra-ui/react'
-
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 export default function CreateOrganisation(): JSX.Element {
@@ -59,16 +59,18 @@ export default function CreateOrganisation(): JSX.Element {
                         />
                     </FormControl>
                     <Stack spacing={6} direction={['column', 'row']}>
-                        <Button
-                            bg={'red.500'}
-                            color={'white'}
-                            w='full'
-                            _hover={{
-                                bg: 'red.600',
-                            }}
-                        >
-                            Anuluj
-                        </Button>
+                        <Link to='/panel' style={{ width: '100%' }}>
+                            <Button
+                                bg={'red.500'}
+                                color={'white'}
+                                w='full'
+                                _hover={{
+                                    bg: 'red.600',
+                                }}
+                            >
+                                Anuluj
+                            </Button>
+                        </Link>
                         <Button
                             bg={'purple.600'}
                             color={'white'}
