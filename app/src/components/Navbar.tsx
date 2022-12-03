@@ -133,12 +133,12 @@ export default function Navbar(props: ButtonProps) {
                                 ></IconButton>
                             </MenuButton>
                             <MenuList>
+                                <MenuItem>Profil</MenuItem>
+                                <MenuItem>Ustawienia</MenuItem>
+                                <MenuDivider />
                                 <MenuItem onClick={() => logout()}>
                                     Wyloguj się
                                 </MenuItem>
-                                <MenuItem>Link 2</MenuItem>
-                                <MenuDivider />
-                                <MenuItem>Link 3</MenuItem>
                             </MenuList>
                         </Menu>
                     </Flex>
