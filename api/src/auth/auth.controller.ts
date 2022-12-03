@@ -6,9 +6,9 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { Public } from 'src/common/decorators';
+import { GetCurrentUser, Public } from 'src/common/decorators';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
+import { LoginDto, SignupDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,9 +17,9 @@ export class AuthController {
   @Public()
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
-  async signup(@Body() dto: AuthDto) {
-    const accessToken = await this.authService.signup(dto);
-    return accessToken;
+  async signup(@Body() dto: SignupDto) {
+    const data = await this.authService.signup(dto);
+    return data;
   }
 
   @Get('getUsers')
@@ -31,8 +31,15 @@ export class AuthController {
   @Post('signin')
   @Public()
   @HttpCode(HttpStatus.OK)
-  async signin(@Body() dto: AuthDto) {
-    const accessToken = await this.authService.login(dto);
-    return accessToken;
+  async signin(@Body() dto: LoginDto) {
+    const data = await this.authService.login(dto);
+    return data;
+  }
+
+  @Get('validate')
+  @HttpCode(HttpStatus.OK)
+  async validate(@GetCurrentUser('sub') userId: number) {
+    const user = await this.authService.validateUser(userId);
+    return user;
   }
 }

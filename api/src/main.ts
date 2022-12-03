@@ -13,6 +13,7 @@ async function bootstrap() {
   );
   const reflector = new Reflector();
   app.useGlobalGuards(new AccessTokenGuard(reflector));
+  app.enableCors();
   await app.listen(8000);
 }
 bootstrap();
