@@ -65,18 +65,20 @@ export default function NotLoggedNavbar(props: ButtonProps) {
                     flex={{ base: 1 }}
                     justify={{ base: 'center', md: 'start' }}
                 >
-                    <Text
-                        textAlign={useBreakpointValue({
-                            base: 'center',
-                            md: 'left',
-                        })}
-                        fontFamily={'heading'}
-                        fontWeight='bold'
-                        color={useColorModeValue('gray.800', 'white')}
-                        cursor='pointer'
-                    >
-                        UrlopPlanner
-                    </Text>
+                    <Link to='/'>
+                        <Text
+                            textAlign={useBreakpointValue({
+                                base: 'center',
+                                md: 'left',
+                            })}
+                            fontFamily={'heading'}
+                            fontWeight='bold'
+                            color={useColorModeValue('gray.800', 'white')}
+                            cursor='pointer'
+                        >
+                            UrlopPlanner
+                        </Text>
+                    </Link>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                         <DesktopNav />
