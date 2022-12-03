@@ -62,21 +62,11 @@ function StatsCard(props: StatsCardProps) {
 const UserView = () => {
     return (
         <Container py={5} maxW={'container.lg'}>
-            <Flex direction='column' gap={10}>
-                <Flex gap={20} justify='space-between'>
+            <Flex direction='column' gap={8}>
+                <Flex justify='space-between'>
                     <Heading as={'h2'}>
                         Nazwa firmy (gdzie są bakusie?!?)
                     </Heading>
-                    <Button
-                        rightIcon={<BellIcon />}
-                        bg='purple.600'
-                        _hover={{
-                            bg: 'purple.700',
-                        }}
-                        variant='solid'
-                    >
-                        Wyślij prośbę o urlop
-                    </Button>
                 </Flex>
                 <SimpleGrid
                     columns={{ base: 1, md: 3 }}
@@ -98,6 +88,21 @@ const UserView = () => {
                         icon={<GoLocation size={'3em'} />}
                     />
                 </SimpleGrid>
+                <Flex justify='right'>
+                    {' '}
+                    <Button
+                        rightIcon={<BellIcon />}
+                        color={'gray.100'}
+                        bg={'purple.600'}
+                        as={'a'}
+                        href={'#'}
+                        _hover={{
+                            bg: 'purple.700',
+                        }}
+                    >
+                        Wyślij prośbę o urlop
+                    </Button>
+                </Flex>
             </Flex>
         </Container>
     )
