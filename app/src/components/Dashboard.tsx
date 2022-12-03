@@ -1,4 +1,5 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { useState } from "react";
 import Organization from "./Organization";
 
 const Dashboard = () => {
@@ -50,13 +51,34 @@ const Dashboard = () => {
     <Organization key={organization.id} {...organization} />
   ));
 
+  const [term, setTerm] = useState("");
+
+  const handleForm = (e: any) => {
+    e.preventDefault();
+    setTerm(e.target.value);
+  };
+
   return (
     <>
-      <FormControl w="40%">
-        <FormLabel fontSize="32px">Wyszukiwarka</FormLabel>
-        <Input placeholder="Wyszukaj swoja organizacje" />
-      </FormControl>
-      {orgElements}
+      <Flex justify="center" align="center" pb="20px">
+        <FormControl w="40%">
+          <FormLabel textAlign="center" fontSize="32px">
+            Wyszukiwarka
+          </FormLabel>
+          <Input
+            value={term}
+            onChange={handleForm}
+            placeholder="Wyszukaj swoja organizacje"
+          />
+        </FormControl>
+      </Flex>
+      {organizations
+        .filter((org) =>
+          org.organizationName.toLocaleLowerCase().includes(term)
+        )
+        .map((organization) => (
+          <Organization key={organization.id} {...organization} />
+        ))}
     </>
   );
 };
