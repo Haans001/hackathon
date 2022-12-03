@@ -66,6 +66,7 @@ const Dashboard = () => {
             Wyszukiwarka
           </FormLabel>
           <Input
+            autoFocus
             value={term}
             onChange={handleForm}
             placeholder="Wyszukaj swoja organizacje"

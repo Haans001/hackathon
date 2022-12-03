@@ -1,4 +1,4 @@
-import { Card, CardBody, Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Card, CardBody, Flex, Image, Text } from "@chakra-ui/react";
 
 const Organization = (props: any) => {
   return (
@@ -23,11 +23,24 @@ const Organization = (props: any) => {
                 <Text>Założyciel: {props.owner}</Text>
               </Flex>
 
-              <Flex flexDirection="column" justify="center">
+              <Flex pl="50px" flexDirection="column" justify="center">
                 <Text fontSize="25px">
                   Nazwa organizacji: {props.organizationName}
                 </Text>
                 <Text>Liczba czlonkow: {props.usersCount}</Text>
+                <Button
+                  type="button"
+                  size="md"
+                  w="60%"
+                  bg={"purple.600"}
+                  marginTop="20px"
+                  color={"white"}
+                  _hover={{
+                    bg: "purple.700",
+                  }}
+                >
+                  Przejdź do organizacji
+                </Button>
               </Flex>
             </Flex>
           </CardBody>
