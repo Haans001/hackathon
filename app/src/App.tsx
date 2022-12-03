@@ -25,7 +25,7 @@ function App() {
           ></Route>
           <Route
             element={loggedIn ? <Navigate to="/dashboard" /> : <WelcomePage />}
-            path="/home"
+            path="/"
           ></Route>
         </Routes>
       </ChakraProvider>
