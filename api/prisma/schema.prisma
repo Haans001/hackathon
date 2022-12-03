@@ -24,12 +24,12 @@ model User {
 }
 
 model Ticket {
-  id        Int      @id @default(autoincrement())
-  title     String
-  startTime DateTime
-  endTime   DateTime
-  createdAt DateTime @default(now())
-
+  id             Int          @id @default(autoincrement())
+  title          String
+  startTime      DateTime
+  endTime        DateTime
+  createdAt      DateTime     @default(now())
+  approved       Boolean?
   userId         Int
   user           User         @relation(fields: [userId], references: [id])
   organisationId Int
