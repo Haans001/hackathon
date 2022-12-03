@@ -3,7 +3,6 @@ import {
     Flex,
     Text,
     IconButton,
-    Button,
     Stack,
     Collapse,
     Icon,
@@ -14,6 +13,9 @@ import {
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
+    Button,
+    useColorMode,
+    ButtonProps,
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -21,11 +23,11 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
 } from '@chakra-ui/icons'
-import { FaRegUser } from 'react-icons/fa'
+import { BsSun, BsMoonStarsFill } from 'react-icons/bs'
 
-export default function NotLoggedNavbar() {
+export default function NotLoggedNavbar(props: ButtonProps) {
     const { isOpen, onToggle } = useDisclosure()
-
+    const { colorMode, toggleColorMode } = useColorMode()
     return (
         <Box>
             <Flex
@@ -71,6 +73,7 @@ export default function NotLoggedNavbar() {
                         fontFamily={'heading'}
                         fontWeight='bold'
                         color={useColorModeValue('gray.800', 'white')}
+                        cursor='pointer'
                     >
                         UrlopPlanner
                     </Text>
@@ -86,11 +89,43 @@ export default function NotLoggedNavbar() {
                     direction={'row'}
                     spacing={6}
                 >
-                    <IconButton
-                        aria-label='user-profile'
-                        borderRadius='3xl'
-                        icon={<FaRegUser />}
-                    ></IconButton>
+                    <Button
+                        aria-label='Toggle Color Mode'
+                        onClick={toggleColorMode}
+                        _focus={{ boxShadow: 'none' }}
+                        w='fit-content'
+                        borderRadius={'9999px'}
+                        {...props}
+                    >
+                        {colorMode === 'light' ? (
+                            <BsMoonStarsFill />
+                        ) : (
+                            <BsSun />
+                        )}
+                    </Button>
+                    <Button
+                        as={'a'}
+                        fontSize={'sm'}
+                        fontWeight={400}
+                        variant={'link'}
+                        href={'#'}
+                    >
+                        Zaloguj się
+                    </Button>
+                    <Button
+                        display={{ base: 'none', md: 'inline-flex' }}
+                        fontSize={'sm'}
+                        fontWeight={600}
+                        color={'white'}
+                        bg={'purple.600'}
+                        as={'a'}
+                        href={'#'}
+                        _hover={{
+                            bg: 'purple.700',
+                        }}
+                    >
+                        Zarejestruj się
+                    </Button>
                 </Stack>
             </Flex>
 

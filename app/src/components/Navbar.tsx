@@ -14,6 +14,13 @@ import {
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuDivider,
+    useColorMode,
+    ButtonProps,
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -22,10 +29,11 @@ import {
     ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { FaRegUser } from 'react-icons/fa'
+import { BsSun, BsMoonStarsFill } from 'react-icons/bs'
 
-export default function Navbar() {
+export default function Navbar(props: ButtonProps) {
     const { isOpen, onToggle } = useDisclosure()
-
+    const { colorMode, toggleColorMode } = useColorMode()
     return (
         <Box>
             <Flex
@@ -71,6 +79,7 @@ export default function Navbar() {
                         fontFamily={'heading'}
                         fontWeight='bold'
                         color={useColorModeValue('gray.800', 'white')}
+                        cursor='pointer'
                     >
                         UrlopPlanner
                     </Text>
@@ -86,11 +95,43 @@ export default function Navbar() {
                     direction={'row'}
                     spacing={6}
                 >
-                    <IconButton
-                        aria-label='user-profile'
-                        borderRadius='3xl'
-                        icon={<FaRegUser />}
-                    ></IconButton>
+                    <Button
+                        aria-label='Toggle Color Mode'
+                        onClick={toggleColorMode}
+                        _focus={{ boxShadow: 'none' }}
+                        w='fit-content'
+                        borderRadius={'9999px'}
+                        {...props}
+                    >
+                        {colorMode === 'light' ? (
+                            <BsMoonStarsFill />
+                        ) : (
+                            <BsSun />
+                        )}
+                    </Button>
+                    <Flex alignItems={'center'}>
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}
+                            >
+                                <IconButton
+                                    aria-label='user-profile'
+                                    borderRadius='3xl'
+                                    icon={<FaRegUser />}
+                                ></IconButton>
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>Link 1</MenuItem>
+                                <MenuItem>Link 2</MenuItem>
+                                <MenuDivider />
+                                <MenuItem>Link 3</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </Flex>
                 </Stack>
             </Flex>
 
