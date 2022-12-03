@@ -5,6 +5,14 @@ const Ticket = (props: any) => {
   const start = new Date(props.startTime);
   const end = new Date(props.endTime);
 
+  const handlePlusButton = () => {
+    console.log("plus");
+  };
+
+  const handleMinusButton = () => {
+    console.log("minus");
+  };
+
   return (
     <Flex justify={"center"}>
       <Card w={"50%"}>
@@ -20,10 +28,10 @@ const Ticket = (props: any) => {
               <Text>{`od ${start.getDay()}-${start.getMonth()}-${start.getFullYear()}r. do ${end.getDay()}-${end.getMonth()}-${end.getFullYear()}r.`}</Text>
             </Flex>
             <Flex alignContent={"center"}>
-              <Button w="32px" marginRight="10px">
+              <Button w="32px" marginRight="10px" onClick={handleMinusButton}>
                 <MinusIcon />
               </Button>
-              <Button w="32px">
+              <Button w="32px" onClick={handlePlusButton}>
                 <SmallAddIcon fontSize={"42px"} />
               </Button>
             </Flex>
