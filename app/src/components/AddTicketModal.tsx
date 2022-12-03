@@ -10,29 +10,28 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
-  useDisclosure,
 } from "@chakra-ui/react";
 import * as React from "react";
-import { useMutation, useQuery } from "react-query";
-import axios from "../../config/axios";
+import { useMutation } from "react-query";
+import axios from "../config/axios";
 
-const AddTicketsModal = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  organisationId: number;
+}
 
+const AddTicketsModal: React.FunctionComponent<Props> = ({
+  isOpen,
+  onClose,
+  organisationId,
+}) => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
   const [title, setTitle] = React.useState("");
   const [startTime, setStartTime] = React.useState("");
   const [endTime, setEndTime] = React.useState("");
-  const [organisationId, setOrganisationId] = React.useState<number | null>(
-    null
-  );
-
-  const { data } = useQuery("organisations", () =>
-    axios.get("/organisations/getAll")
-  );
 
   const { mutateAsync: createTicket } = useMutation((data: any) =>
     axios.post("/tickets/create", data)
@@ -58,10 +57,6 @@ const AddTicketsModal = () => {
 
   return (
     <>
-      <Button mt={6} onClick={onOpen}>
-        Add Ticket
-      </Button>
-
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -104,21 +99,6 @@ const AddTicketsModal = () => {
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
                 />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Wybierz organizacje</FormLabel>
-                <Select
-                  placeholder="Select option"
-                  onChange={(e) => setOrganisationId(parseInt(e.target.value))}
-                >
-                  {data?.data.map(
-                    ({ name, id }: { name: string; id: number }) => (
-                      <option key={id} value={id}>
-                        {name}
-                      </option>
-                    )
-                  )}
-                </Select>
               </FormControl>
             </ModalBody>
             <ModalFooter>

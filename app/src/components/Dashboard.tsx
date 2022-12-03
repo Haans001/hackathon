@@ -42,15 +42,12 @@ const Dashboard = () => {
     axios.get("/organisations/getAll")
   );
 
-  // console.log(data?.data);
-
   const organizations = React.useMemo<OrganizationType[]>(() => {
     const d = data?.data.map(
       (org: { id: any; name: any; users: any[]; ownerId: any }) => {
         const owner = org.users.find(
           (user: { userId: any }) => user.userId === org.ownerId
         );
-        console.log(owner.user, org);
         return {
           id: org.id,
           organizationName: org.name,

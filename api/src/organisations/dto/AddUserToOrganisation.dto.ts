@@ -1,9 +1,9 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class AddUserToOrganisationDto {
   @IsNotEmpty()
-  @IsNumber()
-  addedUserId: number;
+  @IsEmail()
+  email: string;
 
   @IsNotEmpty()
   @IsNumber()
