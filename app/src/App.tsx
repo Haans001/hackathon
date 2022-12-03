@@ -1,19 +1,13 @@
 import { ChakraProvider, theme } from "@chakra-ui/react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import { Navbar } from "./components/";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+import WelcomePage from "./components/WelcomePage";
 
 function App() {
   return (
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        <Navbar></Navbar>
-        <Routes>
-          <Route element={<LoginForm />} path="/logowanie"></Route>
-          <Route element={<RegisterForm />} path="/rejestracja"></Route>
-        </Routes>
+        <WelcomePage></WelcomePage>
       </ChakraProvider>
     </BrowserRouter>
   );
