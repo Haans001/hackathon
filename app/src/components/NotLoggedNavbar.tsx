@@ -6,7 +6,6 @@ import {
     Stack,
     Collapse,
     Icon,
-    Link,
     Popover,
     PopoverTrigger,
     PopoverContent,
@@ -24,12 +23,13 @@ import {
     ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { BsSun, BsMoonStarsFill } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 export default function NotLoggedNavbar(props: ButtonProps) {
     const { isOpen, onToggle } = useDisclosure()
     const { colorMode, toggleColorMode } = useColorMode()
     return (
-        <Box>
+        <Box pos='fixed' w='100%'>
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
@@ -41,7 +41,7 @@ export default function NotLoggedNavbar(props: ButtonProps) {
                 borderColor={useColorModeValue('gray.200', 'gray.900')}
                 align={'center'}
                 fontFamily='poppins'
-                fontSize='xl'
+                fontSize='2xl'
             >
                 <Flex
                     flex={{ base: 1, md: 'auto' }}
@@ -103,29 +103,34 @@ export default function NotLoggedNavbar(props: ButtonProps) {
                             <BsSun />
                         )}
                     </Button>
-                    <Button
-                        as={'a'}
-                        fontSize={'sm'}
-                        fontWeight={400}
-                        variant={'link'}
-                        href={'#'}
-                    >
-                        Zaloguj się
-                    </Button>
-                    <Button
-                        display={{ base: 'none', md: 'inline-flex' }}
-                        fontSize={'sm'}
-                        fontWeight={600}
-                        color={'white'}
-                        bg={'purple.600'}
-                        as={'a'}
-                        href={'#'}
-                        _hover={{
-                            bg: 'purple.700',
-                        }}
-                    >
-                        Zarejestruj się
-                    </Button>
+                    <Link to='/logowanie'>
+                        <Button
+                            as={'a'}
+                            fontSize={'sm'}
+                            fontWeight={400}
+                            variant={'link'}
+                            href={'#'}
+                        >
+                            Zaloguj się
+                        </Button>
+                    </Link>
+                    <Link to='/rejestracja'>
+                        {' '}
+                        <Button
+                            display={{ base: 'none', md: 'inline-flex' }}
+                            fontSize={'sm'}
+                            fontWeight={600}
+                            color={'white'}
+                            bg={'purple.600'}
+                            as={'a'}
+                            href={'#'}
+                            _hover={{
+                                bg: 'purple.700',
+                            }}
+                        >
+                            Zarejestruj się
+                        </Button>
+                    </Link>
                 </Stack>
             </Flex>
 
@@ -147,9 +152,8 @@ const DesktopNav = () => {
                 <Box key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
-                            <Link
+                            <Text
                                 p={2}
-                                href={navItem.href ?? '#'}
                                 fontSize={'sm'}
                                 fontWeight={500}
                                 color={linkColor}
@@ -159,7 +163,7 @@ const DesktopNav = () => {
                                 }}
                             >
                                 {navItem.label}
-                            </Link>
+                            </Text>
                         </PopoverTrigger>
 
                         {navItem.children && (
@@ -190,8 +194,7 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
     return (
-        <Link
-            href={href}
+        <Text
             role={'group'}
             display={'block'}
             p={2}
@@ -229,7 +232,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
                     />
                 </Flex>
             </Stack>
-        </Link>
+        </Text>
     )
 }
 
@@ -254,8 +257,6 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         <Stack spacing={4} onClick={children && onToggle}>
             <Flex
                 py={2}
-                as={Link}
-                href={href ?? '#'}
                 justify={'space-between'}
                 align={'center'}
                 _hover={{
@@ -294,9 +295,9 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 >
                     {children &&
                         children.map((child) => (
-                            <Link key={child.label} py={2} href={child.href}>
+                            <Text key={child.label} py={2}>
                                 {child.label}
-                            </Link>
+                            </Text>
                         ))}
                 </Stack>
             </Collapse>
@@ -311,41 +312,4 @@ interface NavItem {
     href?: string
 }
 
-const NAV_ITEMS: NavItem[] = [
-    {
-        label: 'Panel',
-        href: '#',
-    },
-    {
-        label: 'Zespoły',
-        children: [
-            {
-                label: 'Załóż zespoł',
-                subLabel:
-                    'Załóż nową zespół i popraw swój kontakt z pracownikami!',
-                href: '#',
-            },
-            {
-                label: 'Zarządzaj zespołami',
-                subLabel: 'Miej kontrolę nad zespołami!',
-                href: '#',
-            },
-        ],
-    },
-    {
-        label: 'Zadania',
-        children: [
-            {
-                label: 'Lista zadań',
-                subLabel: 'Sprawdź swoje zadania',
-                href: '#',
-            },
-            {
-                label: 'Pomodoro',
-                subLabel:
-                    'Skorzystaj z metody pomodoro do zwiększenia efektywności Twojej pracy',
-                href: '#',
-            },
-        ],
-    },
-]
+const NAV_ITEMS: NavItem[] = []

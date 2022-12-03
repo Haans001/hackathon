@@ -35,7 +35,7 @@ export default function Navbar(props: ButtonProps) {
     const { isOpen, onToggle } = useDisclosure()
     const { colorMode, toggleColorMode } = useColorMode()
     return (
-        <Box>
+        <Box pos='fixed' w='100%'>
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
@@ -47,7 +47,7 @@ export default function Navbar(props: ButtonProps) {
                 borderColor={useColorModeValue('gray.200', 'gray.900')}
                 align={'center'}
                 fontFamily='poppins'
-                fontSize='xl'
+                fontSize='2xl'
             >
                 <Flex
                     flex={{ base: 1, md: 'auto' }}
@@ -84,7 +84,7 @@ export default function Navbar(props: ButtonProps) {
                         UrlopPlanner
                     </Text>
 
-                    <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+                    <Flex display={{ base: 'none', md: 'flex' }} ml={14}>
                         <DesktopNav />
                     </Flex>
                 </Flex>
@@ -148,7 +148,7 @@ const DesktopNav = () => {
     const popoverContentBgColor = useColorModeValue('white', 'gray.700')
 
     return (
-        <Stack direction={'row'} spacing={4}>
+        <Stack direction={'row'} spacing={6}>
             {NAV_ITEMS.map((navItem) => (
                 <Box key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
@@ -156,7 +156,7 @@ const DesktopNav = () => {
                             <Link
                                 p={2}
                                 href={navItem.href ?? '#'}
-                                fontSize={'sm'}
+                                fontSize={'large'}
                                 fontWeight={500}
                                 color={linkColor}
                                 _hover={{
@@ -202,7 +202,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
             display={'block'}
             p={2}
             rounded={'md'}
-            _hover={{ bg: useColorModeValue('pink.50', 'gray.700') }}
+            _hover={{ bg: useColorModeValue('white', 'gray.700') }}
         >
             <Stack direction={'row'} align={'center'}>
                 <Box>
