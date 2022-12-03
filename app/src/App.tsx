@@ -1,5 +1,5 @@
 import { ChakraProvider, theme } from '@chakra-ui/react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import './App.css'
 import { Navbar } from './components/'
 import LoginForm from './components/LoginForm'
@@ -14,9 +14,24 @@ function App() {
             <ChakraProvider theme={theme}>
                 {loggedIn ? <Navbar /> : <NotLoggedNavbar />}
                 <Routes>
-                    <Route element={<LoginForm />} path='/logowanie'></Route>
                     <Route
-                        element={<RegisterForm />}
+                        element={
+                            loggedIn ? (
+                                <Navigate to='/dashboard' />
+                            ) : (
+                                <LoginForm />
+                            )
+                        }
+                        path='/logowanie'
+                    ></Route>
+                    <Route
+                        element={
+                            loggedIn ? (
+                                <Navigate to='/dashboard' />
+                            ) : (
+                                <RegisterForm />
+                            )
+                        }
                         path='/rejestracja'
                     ></Route>
                 </Routes>
