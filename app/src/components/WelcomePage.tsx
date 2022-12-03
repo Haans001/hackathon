@@ -17,7 +17,7 @@ const WelcomePage = () => {
             lineHeight={"110%"}
           >
             Zarządzaj urlopami <br />
-            <Text as={"span"} color={"green.400"}>
+            <Text as={"span"} color={"purple.600"}>
               swoich pracownikow
             </Text>
           </Heading>
@@ -36,11 +36,11 @@ const WelcomePage = () => {
             <Link to="/rejestracja">
               <Button
                 colorScheme={"green"}
-                bg={"green.400"}
+                bg={"purple.600"}
                 rounded={"full"}
                 px={6}
                 _hover={{
-                  bg: "green.500",
+                  bg: "purple.700",
                 }}
               >
                 Zarejestruj się
