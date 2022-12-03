@@ -1,15 +1,12 @@
-import { SmallAddIcon } from '@chakra-ui/icons'
+import { MinusIcon, SmallAddIcon } from '@chakra-ui/icons'
 import { Button, Card, CardBody, Flex, Stack, Text } from '@chakra-ui/react'
 import { useMutation } from 'react-query'
 import axios from '../config/axios'
+import { useAuth } from '../providers/AuthProvider'
 
 const Ticket = (props: any) => {
     const start = new Date(props.startTime)
     const end = new Date(props.endTime)
-
-    const handlePlusButton = () => {
-        console.log('plus')
-    }
 
     const { mutate: approveOrDisapproveTicket } = useMutation(
         (data: any) => axios.put('/tickets/approveOrDisapproveTicket', data),
@@ -18,6 +15,34 @@ const Ticket = (props: any) => {
                 props.onSuccess()
             },
         }
+    )
+
+    const { user } = useAuth()
+
+    const { mutate: vote } = useMutation(
+        (data: any) => axios.post('/tickets/upvote', data),
+        {
+            onSuccess: () => {
+                props.onSuccess()
+            },
+        }
+    )
+
+    const pluses = props.votes.filter(
+        (vote: { status: any }) => vote.status
+    ).length
+    const minuses = props.votes.filter(
+        (vote: { status: any }) => !vote.status
+    ).length
+
+    const hasVotedPlus = props.votes.find(
+        (vote: { userId: any; status: any }) =>
+            vote.userId === user.id && vote.status
+    )
+
+    const hasVotedMinus = props.votes.find(
+        (vote: { userId: any; status: any }) =>
+            vote.userId === user.id && !vote.status
     )
 
     return (
@@ -69,7 +94,7 @@ const Ticket = (props: any) => {
                                             })
                                         }
                                     >
-                                        Approve
+                                        Zaakcpetuj
                                     </Button>
                                     <Button
                                         onClick={() =>
@@ -83,24 +108,44 @@ const Ticket = (props: any) => {
                                             bg: 'red.700',
                                         }}
                                     >
-                                        Reject
+                                        Odrzuć
                                     </Button>
                                 </Stack>
                             ) : props.approved === null ? (
-                                <Text color={'yellow.700'}>Pending</Text>
+                                <Text color={'yellow.700'}>W toku</Text>
                             ) : props.approved ? (
-                                <Text color='green.700'>Approved</Text>
+                                <Text color='green.700'>Zaackeptowany</Text>
                             ) : (
-                                <Text color='red.700'>Rejected</Text>
+                                <Text color='red.700'>Odrzucony</Text>
                             )}
                             <Button
-                                h='50%'
+                                h='42px'
                                 marginLeft={'15px'}
                                 w='42px'
-                                onClick={handlePlusButton}
+                                onClick={() =>
+                                    vote({ ticketId: props.id, status: true })
+                                }
                             >
-                                <SmallAddIcon fontSize={'42px'} />
+                                <SmallAddIcon
+                                    color={hasVotedPlus && 'green.400'}
+                                    fontSize={'42px'}
+                                />
                             </Button>
+                            <Text ml={2}>{pluses}</Text>
+                            <Button
+                                onClick={() =>
+                                    vote({ ticketId: props.id, status: false })
+                                }
+                                marginLeft={'15px'}
+                                w='42px'
+                                h='42px'
+                            >
+                                <MinusIcon
+                                    color={hasVotedMinus && 'red.400'}
+                                    fontSize={'42px'}
+                                />
+                            </Button>
+                            <Text ml={2}>{minuses}</Text>
                         </Flex>
                     </Flex>
                 </CardBody>

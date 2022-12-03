@@ -47,7 +47,6 @@ const AuthProvider: React.FunctionComponent<{
       try {
         const d = await _signup(data);
         setUser(d.data.user);
-        console.log(d.data);
         localStorage.setItem("token", d.data.accessToken);
       } catch (error: any) {
         throw new Error(error.response.data.message);
@@ -61,7 +60,6 @@ const AuthProvider: React.FunctionComponent<{
       try {
         const d = await _login(data);
         setUser(d.data.user);
-        console.log(d.data);
         localStorage.setItem("token", d.data.accessToken);
       } catch (error: any) {
         throw new Error(error.response.data.message);

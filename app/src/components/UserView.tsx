@@ -102,8 +102,6 @@ const UserView = () => {
   const content = React.useMemo(() => {
     if (data) {
       const organisation = data.data;
-      console.log(organisation);
-
       return {
         ownerId: organisation.ownerId,
         name: organisation.name,
@@ -114,15 +112,13 @@ const UserView = () => {
     }
   }, [data]);
 
-  console.log(content?.tickets);
-
   const isOwner = content?.ownerId === user?.id;
 
   return content ? (
     <Container py={5} maxW={"container.lg"}>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between">
-          <Heading as={"h2"}>Nazwa firmy {content.name}</Heading>
+          <Heading as={"h2"}>Nazwa organizacji {content.name}</Heading>
           {isOwner ? (
             <Button
               onClick={onAddUserModalOpen}
@@ -180,7 +176,6 @@ const UserView = () => {
       <Heading my={6} as={"h2"}>
         Zgłoszenia
       </Heading>
-
       <Flex flexDirection="column" gap={"10px"}>
         {content.tickets.map((ticket) => (
           <Ticket

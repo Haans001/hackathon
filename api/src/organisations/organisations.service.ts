@@ -49,6 +49,7 @@ export class OrganisationsService {
             title: true,
             approved: true,
             id: true,
+            votes: true,
             user: {
               select: {
                 id: true,
@@ -87,16 +88,12 @@ export class OrganisationsService {
         id: organisationId,
       },
       select: {
-        owner: {
-          select: {
-            id: true,
-          },
-        },
+        owner: true,
       },
     });
 
     if (organisation.owner.id !== userId) {
-      throw new Error('You are not the owner of this organisation');
+      throw new Error('Nie jesteś właścicielem tej organizacji');
     }
 
     const user = await this.prisma.user.findUnique({
@@ -106,7 +103,7 @@ export class OrganisationsService {
     });
 
     if (!user) {
-      throw new HttpException('User not found', 404);
+      throw new HttpException('Nie znaleziono użytkownika', 404);
     }
 
     const data = await this.prisma.organisation.update({
@@ -151,16 +148,8 @@ export class OrganisationsService {
             },
           },
         },
-        owner: {
-          select: {
-            name: true,
-            surname: true,
-            id: true,
-          },
-        },
       },
     });
-
     return data;
   }
 }

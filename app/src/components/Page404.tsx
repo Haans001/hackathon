@@ -1,4 +1,5 @@
-import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const Page404 = () => {
   return (
@@ -27,7 +28,11 @@ const Page404 = () => {
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
-          ></Stack>
+          >
+            <Link to="/">
+              <Button>Powróć</Button>
+            </Link>
+          </Stack>
         </Stack>
       </Container>
     </>

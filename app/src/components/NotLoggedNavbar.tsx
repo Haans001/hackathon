@@ -75,8 +75,9 @@ export default function NotLoggedNavbar(props: ButtonProps) {
                             fontWeight='bold'
                             color={useColorModeValue('gray.800', 'white')}
                             cursor='pointer'
+                            fontStyle='italic'
                         >
-                            UrlopPlanner
+                            Hutadoro
                         </Text>
                     </Link>
 

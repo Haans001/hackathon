@@ -29,4 +29,13 @@ export class TicketController {
       data.status,
     );
   }
+
+  @Post('upvote')
+  async upvote(
+    @GetCurrentUser('sub') userId: number,
+    @Body('ticketId') ticketId: number,
+    @Body('status') status: boolean,
+  ) {
+    return await this.ticketService.upvoteTicket(userId, ticketId, status);
+  }
 }
