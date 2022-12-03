@@ -1,4 +1,5 @@
 import { Box, Button, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const WelcomePage = () => {
   return (
@@ -32,20 +33,24 @@ const WelcomePage = () => {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Button
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
-              px={6}
-              _hover={{
-                bg: "green.500",
-              }}
-            >
-              Zarejestruj się
-            </Button>
-            <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-              Zaloguj się
-            </Button>
+            <Link to="/rejestracja">
+              <Button
+                colorScheme={"green"}
+                bg={"green.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "green.500",
+                }}
+              >
+                Zarejestruj się
+              </Button>
+            </Link>
+            <Link to="/logowanie">
+              <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
+                Zaloguj się
+              </Button>
+            </Link>
           </Stack>
         </Stack>
       </Container>
