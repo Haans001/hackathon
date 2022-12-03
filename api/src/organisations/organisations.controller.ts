@@ -55,7 +55,7 @@ export class OrganisationsController {
   ) {
     const organisation = await this.organisationsService.addUserToOrganisation(
       userId,
-      data.addedUserId,
+      data.email,
       data.organisationId,
     );
     return organisation;

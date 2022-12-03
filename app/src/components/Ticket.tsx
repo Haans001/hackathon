@@ -17,6 +17,9 @@ const Ticket = (props: any) => {
             <Flex flexDirection={"column"} gap={"10px"} h={"100%"}>
               <Text>{props.name}</Text>
               <Text>{props.title}</Text>
+              <Text>
+                Dodane przez: {props.user.name} {props.user.surname}
+              </Text>
               <Text>{`od ${start.getDay()}-${start.getMonth()}-${start.getFullYear()}r. do ${end.getDay()}-${end.getMonth()}-${end.getFullYear()}r.`}</Text>
             </Flex>
             <Flex alignContent={"center"} h="100%" align={"center"}>

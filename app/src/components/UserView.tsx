@@ -23,7 +23,9 @@ import { BellIcon } from "@chakra-ui/icons";
 import * as React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../providers/AuthProvider";
 import AddTicketsModal from "./AddTicketModal";
+import AddUserToOrganisationModal from "./AddUserToOrganisationModal";
 import Ticket from "./Ticket";
 
 interface StatsCardProps {
@@ -64,38 +66,30 @@ function StatsCard(props: StatsCardProps) {
 interface TicketType {
   id: number;
   title: string;
-  name: string;
+  user: {
+    name: string;
+    surname: string;
+  };
   startTime: string;
   endTime: string;
 }
 
-const tickets: TicketType[] = [
-  {
-    id: 0,
-    name: "Jakub Wajstak",
-    title: "Wyjazd na wakacje",
-    startTime: "2022-12-14T11:45:00.000Z",
-    endTime: "2022-12-16T12:34:00.000Z",
-  },
-  {
-    id: 1,
-    title: "Wyjazd do rodziny",
-    name: "Marcin Sobota",
-    startTime: "2022-12-14T11:45:00.000Z",
-    endTime: "2022-12-16T12:34:00.000Z",
-  },
-  {
-    id: 2,
-    title: "Wyjazd na pogrzeb",
-    name: "Marcin Niedziela",
-    startTime: "2022-12-14T11:45:00.000Z",
-    endTime: "2022-12-16T12:34:00.000Z",
-  },
-];
-
 const UserView = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const {
+    isOpen: isAddTicketsModalOpen,
+    onClose: onAddTicketsModalClose,
+    onOpen: onAddTicketModalOpen,
+  } = useDisclosure();
+
+  const {
+    isOpen: isAddUserModalOpen,
+    onClose: onAddUserModalClose,
+    onOpen: onAddUserModalOpen,
+  } = useDisclosure();
+
   const params = useParams();
+
+  const { user } = useAuth();
 
   const { data } = useQuery("organisation", () =>
     axios.get(`/organisations/${params.id}`)
@@ -106,18 +100,34 @@ const UserView = () => {
       const organisation = data.data;
 
       return {
+        ownerId: organisation.ownerId,
         name: organisation.name,
         usersCount: organisation.users.length,
         ownerName: `${organisation.owner.name} ${organisation.owner.surname}`,
+        tickets: organisation.tickets as TicketType[],
       };
     }
   }, [data]);
+
+  const isOwner = content?.ownerId === user?.id;
 
   return content ? (
     <Container py={5} maxW={"container.lg"}>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between">
           <Heading as={"h2"}>Nazwa firmy {content.name}</Heading>
+          {isOwner ? (
+            <Button
+              onClick={onAddUserModalOpen}
+              color={"gray.100"}
+              bg={"purple.600"}
+              _hover={{
+                bg: "purple.700",
+              }}
+            >
+              Dodaj członka
+            </Button>
+          ) : null}
         </Flex>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
@@ -141,7 +151,7 @@ const UserView = () => {
             rightIcon={<BellIcon />}
             color={"gray.100"}
             bg={"purple.600"}
-            onClick={onOpen}
+            onClick={onAddTicketModalOpen}
             _hover={{
               bg: "purple.700",
             }}
@@ -151,12 +161,21 @@ const UserView = () => {
         </Flex>
       </Flex>
       <AddTicketsModal
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isAddTicketsModalOpen}
+        onClose={onAddTicketsModalClose}
         organisationId={parseInt(params.id as string)}
       />
+      <AddUserToOrganisationModal
+        isOpen={isAddUserModalOpen}
+        onClose={onAddUserModalClose}
+        organisationId={parseInt(params.id as string)}
+      />
+      <Heading my={6} as={"h2"}>
+        Zgłoszenia
+      </Heading>
+
       <Flex flexDirection="column" gap={"10px"}>
-        {tickets.map((ticket) => (
+        {content.tickets.map((ticket) => (
           <Ticket key={ticket.id} {...ticket} />
         ))}
       </Flex>

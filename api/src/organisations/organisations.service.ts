@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -75,7 +75,7 @@ export class OrganisationsService {
 
   async addUserToOrganisation(
     userId: number,
-    addedUserId: number,
+    email: string,
     organisationId: number,
   ) {
     const organisation = await this.prisma.organisation.findUnique({
@@ -95,6 +95,16 @@ export class OrganisationsService {
       throw new Error('You are not the owner of this organisation');
     }
 
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user) {
+      throw new HttpException('User not found', 404);
+    }
+
     const data = await this.prisma.organisation.update({
       where: {
         id: organisationId,
@@ -105,7 +115,7 @@ export class OrganisationsService {
             {
               user: {
                 connect: {
-                  id: addedUserId,
+                  email: email,
                 },
               },
             },
