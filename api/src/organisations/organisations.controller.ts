@@ -61,17 +61,4 @@ export class OrganisationsController {
     );
     return organisation;
   }
-
-  @Post('upvote')
-  async upvote(
-    @GetCurrentUser('sub') userId: number,
-    @Body('ticketId') ticketId: number,
-    @Body('status') status: boolean,
-  ) {
-    return await this.organisationsService.UpvoteTicket(
-      userId,
-      ticketId,
-      status,
-    );
-  }
 }

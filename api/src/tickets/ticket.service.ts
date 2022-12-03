@@ -57,4 +57,46 @@ export class TicketService {
     });
     return ticket;
   }
+
+  async upvoteTicket(userid: number, ticketid: number, stat: boolean) {
+    const vote = await this.prisma.vote.findMany({
+      where: {
+        ticketId: ticketid,
+        userId: userid,
+      },
+    });
+
+    if (vote.length > 0 && vote[0].status === stat) {
+      return true;
+    } else {
+      if (vote.length > 0) {
+        await this.prisma.vote.update({
+          where: {
+            id: vote[0].id,
+          },
+          data: {
+            status: stat,
+          },
+        });
+      } else {
+        await this.prisma.vote.create({
+          data: {
+            status: stat,
+            ticket: {
+              connect: {
+                id: ticketid,
+              },
+            },
+            user: {
+              connect: {
+                id: userid,
+              },
+            },
+          },
+        });
+      }
+    }
+
+    return true;
+  }
 }

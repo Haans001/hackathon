@@ -152,27 +152,4 @@ export class OrganisationsService {
     });
     return data;
   }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  async UpvoteTicket(userid: number, ticketid: number, stat: boolean) {
-    await this.prisma.vote.create({
-      data: {
-        status: stat,
-        ticket: {
-          connect: {
-            id: ticketid,
-          },
-        },
-        user: {
-          connect: {
-            id: userid,
-          },
-        },
-      },
-    });
-    return this.prisma.vote.findMany({
-      where: {
-        ticketId: ticketid,
-      },
-    });
-  }
 }
