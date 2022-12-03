@@ -19,6 +19,8 @@ import {
     MenuList,
     MenuItem,
     MenuDivider,
+    useColorMode,
+    ButtonProps,
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -27,10 +29,11 @@ import {
     ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { FaRegUser } from 'react-icons/fa'
+import { BsSun, BsMoonStarsFill } from 'react-icons/bs'
 
-export default function Navbar() {
+export default function Navbar(props: ButtonProps) {
     const { isOpen, onToggle } = useDisclosure()
-
+    const { colorMode, toggleColorMode } = useColorMode()
     return (
         <Box>
             <Flex
@@ -76,6 +79,7 @@ export default function Navbar() {
                         fontFamily={'heading'}
                         fontWeight='bold'
                         color={useColorModeValue('gray.800', 'white')}
+                        cursor='pointer'
                     >
                         UrlopPlanner
                     </Text>
@@ -91,6 +95,20 @@ export default function Navbar() {
                     direction={'row'}
                     spacing={6}
                 >
+                    <Button
+                        aria-label='Toggle Color Mode'
+                        onClick={toggleColorMode}
+                        _focus={{ boxShadow: 'none' }}
+                        w='fit-content'
+                        borderRadius={'9999px'}
+                        {...props}
+                    >
+                        {colorMode === 'light' ? (
+                            <BsMoonStarsFill />
+                        ) : (
+                            <BsSun />
+                        )}
+                    </Button>
                     <Flex alignItems={'center'}>
                         <Menu>
                             <MenuButton
