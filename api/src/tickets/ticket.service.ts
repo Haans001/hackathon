@@ -45,4 +45,16 @@ export class TicketService {
     });
     return users;
   }
+
+  async approveOrDisapproveTicket(ticketId: number, status: boolean) {
+    const ticket = await this.prisma.ticket.update({
+      where: {
+        id: ticketId,
+      },
+      data: {
+        approved: status,
+      },
+    });
+    return ticket;
+  }
 }

@@ -76,12 +76,6 @@ interface TicketType {
 
 const UserView = () => {
   const {
-    isOpen: isAddTicketsModalOpen,
-    onClose: onAddTicketsModalClose,
-    onOpen: onAddTicketModalOpen,
-  } = useDisclosure();
-
-  const {
     isOpen: isAddUserModalOpen,
     onClose: onAddUserModalClose,
     onOpen: onAddUserModalOpen,
@@ -91,13 +85,24 @@ const UserView = () => {
 
   const { user } = useAuth();
 
-  const { data } = useQuery("organisation", () =>
+  const {
+    isOpen: isAddTicketsModalOpen,
+    onClose: onAddTicketsModalClose,
+    onOpen: onAddTicketModalOpen,
+  } = useDisclosure({
+    onClose: () => {
+      refetch();
+    },
+  });
+
+  const { data, refetch } = useQuery("organisation", () =>
     axios.get(`/organisations/${params.id}`)
   );
 
   const content = React.useMemo(() => {
     if (data) {
       const organisation = data.data;
+      console.log(organisation);
 
       return {
         ownerId: organisation.ownerId,
@@ -108,6 +113,8 @@ const UserView = () => {
       };
     }
   }, [data]);
+
+  console.log(content?.tickets);
 
   const isOwner = content?.ownerId === user?.id;
 
@@ -176,7 +183,12 @@ const UserView = () => {
 
       <Flex flexDirection="column" gap={"10px"}>
         {content.tickets.map((ticket) => (
-          <Ticket key={ticket.id} {...ticket} />
+          <Ticket
+            key={ticket.id}
+            isOwner={isOwner}
+            {...ticket}
+            onSuccess={() => refetch()}
+          />
         ))}
       </Flex>
     </Container>
