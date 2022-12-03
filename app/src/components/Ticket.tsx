@@ -1,4 +1,4 @@
-import { MinusIcon, SmallAddIcon } from "@chakra-ui/icons";
+import { SmallAddIcon } from "@chakra-ui/icons";
 import { Button, Card, CardBody, Flex, Text } from "@chakra-ui/react";
 
 const Ticket = (props: any) => {
@@ -7,10 +7,6 @@ const Ticket = (props: any) => {
 
   const handlePlusButton = () => {
     console.log("plus");
-  };
-
-  const handleMinusButton = () => {
-    console.log("minus");
   };
 
   return (
@@ -28,9 +24,6 @@ const Ticket = (props: any) => {
               <Text>{`od ${start.getDay()}-${start.getMonth()}-${start.getFullYear()}r. do ${end.getDay()}-${end.getMonth()}-${end.getFullYear()}r.`}</Text>
             </Flex>
             <Flex alignContent={"center"}>
-              <Button w="32px" marginRight="10px" onClick={handleMinusButton}>
-                <MinusIcon />
-              </Button>
               <Button w="32px" onClick={handlePlusButton}>
                 <SmallAddIcon fontSize={"42px"} />
               </Button>
