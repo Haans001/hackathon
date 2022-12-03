@@ -75,7 +75,11 @@ export class OrganisationsService {
           },
         },
       },
+      include: {
+        users: true,
+      },
     });
+
     return data;
   }
 }
