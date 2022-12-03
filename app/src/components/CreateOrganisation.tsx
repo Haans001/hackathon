@@ -76,6 +76,7 @@ export default function CreateOrganisation(): JSX.Element {
                             _hover={{
                                 bg: 'purple.700',
                             }}
+                            type='submit'
                         >
                             Stwórz
                         </Button>
