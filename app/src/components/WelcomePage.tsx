@@ -16,15 +16,15 @@ const WelcomePage = () => {
                         fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                         lineHeight={'110%'}
                     >
-                        Zarządzaj urlopami <br />
-                        <Text as={'span'} color={'purple.600'}>
-                            swoich pracownikow
+                        Hutadoro pomoże Ci zarządzać <br />
+                        <Text as={'span'} color={'purple.600'} maxWidth='200px'>
+                            urlopami Twoich pracowników
                         </Text>
                     </Heading>
-                    <Text color={'gray.500'}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quibusdam iure expedita asperiores, nulla temporibus
-                        commodi omnis sequi maxime adipisci aliquid.
+                    <Text color={'gray.400'} fontSize='xl'>
+                        Zarządzaj urlopami swoich pracowników, miej zdalny wpływ
+                        do statystyk na ich temat oraz popraw duch komunikacji w
+                        zespole!
                     </Text>
                     <Stack
                         direction={'column'}
@@ -39,6 +39,7 @@ const WelcomePage = () => {
                                 bg={'purple.600'}
                                 rounded={'full'}
                                 px={6}
+                                color='gray.200'
                                 _hover={{
                                     bg: 'purple.700',
                                 }}
