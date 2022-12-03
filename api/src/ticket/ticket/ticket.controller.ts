@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { HttpCode } from '@nestjs/common/decorators';
 import { HttpStatus } from '@nestjs/common/enums';
 import { GetCurrentUser } from 'src/common/decorators';
@@ -8,6 +8,7 @@ import { TicketService } from './ticket.service';
 @Controller('ticket')
 export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
+  //Create ticket dto
   @Post('create')
   @HttpCode(HttpStatus.CREATED)
   async addTicket(
@@ -15,5 +16,9 @@ export class TicketController {
     @GetCurrentUser('sub') userId: number,
   ) {
     return await this.ticketService.AddTicket(userId, dto);
+  }
+  @Get('all')
+  async GetTickets(@GetCurrentUser('sub') userId: number) {
+    return await this.ticketService.getUserTickets(userId);
   }
 }

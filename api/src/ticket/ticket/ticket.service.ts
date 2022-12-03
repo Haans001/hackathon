@@ -23,4 +23,14 @@ export class TicketService {
     });
     return ticket;
   }
+
+  async getUserTickets(userid: number) {
+    const users = this.prisma.ticket.findMany({
+      where: {
+        userId: userid,
+      },
+    });
+    console.log(users);
+    return users;
+  }
 }
