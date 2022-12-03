@@ -27,7 +27,49 @@ export class OrganisationsService {
         },
       },
     });
-    console.log(data);
+    return data;
+  }
+
+  async getOrganisation(organisationId: number) {
+    const data = await this.prisma.organisation.findUnique({
+      where: {
+        id: organisationId,
+      },
+      include: {
+        owner: {
+          select: {
+            name: true,
+            surname: true,
+          },
+        },
+        tickets: {
+          select: {
+            startTime: true,
+            endTime: true,
+            title: true,
+            id: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                surname: true,
+              },
+            },
+          },
+        },
+        users: {
+          select: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                surname: true,
+              },
+            },
+          },
+        },
+      },
+    });
     return data;
   }
 

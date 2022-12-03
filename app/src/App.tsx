@@ -10,7 +10,6 @@ import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import RegisterForm from "./components/RegisterForm";
-import Tickets from "./components/Tickets";
 import UserSiteOrganisation from "./components/UserSiteOrganisation";
 import WelcomePage from "./components/WelcomePage";
 import { AuthProvider } from "./providers/AuthProvider";
@@ -60,14 +59,6 @@ function App() {
                   </ProtectedRoute>
                 }
                 path="/panel"
-              />
-              <Route
-                element={
-                  <ProtectedRoute>
-                    <Tickets />
-                  </ProtectedRoute>
-                }
-                path="/zgloszenia"
               />
               <Route
                 element={

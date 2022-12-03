@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Put,
 } from '@nestjs/common';
@@ -34,8 +35,16 @@ export class OrganisationsController {
     const organisations = await this.organisationsService.getOrganisations(
       userId,
     );
-    console.log(organisations);
     return organisations;
+  }
+
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  async getOrganisation(@Param('id') id: string) {
+    const organisation = await this.organisationsService.getOrganisation(
+      parseInt(id),
+    );
+    return organisation;
   }
 
   @Put('addUser')

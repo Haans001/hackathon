@@ -15,7 +15,6 @@ import { useAuth } from "../providers/AuthProvider";
 
 export default function SocialProfileWithImage() {
   const { user } = useAuth();
-  console.log(user);
   return (
     <Center py={6}>
       <Box

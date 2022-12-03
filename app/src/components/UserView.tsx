@@ -1,5 +1,12 @@
-import { Box, Button, Container, Flex, Heading } from "@chakra-ui/react";
-import Ticket from "./Ticket";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Heading,
+  useDisclosure,
+} from "@chakra-ui/react";
+import axios from "../config/axios";
 
 import { StarIcon } from "@chakra-ui/icons";
 import {
@@ -13,6 +20,12 @@ import { BsPerson } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 
 import { BellIcon } from "@chakra-ui/icons";
+import * as React from "react";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import AddTicketsModal from "./AddTicketModal";
+import Ticket from "./Ticket";
+
 interface StatsCardProps {
   title: string;
   stat: string;
@@ -48,7 +61,7 @@ function StatsCard(props: StatsCardProps) {
   );
 }
 
-interface Ticket {
+interface TicketType {
   id: number;
   title: string;
   name: string;
@@ -56,7 +69,7 @@ interface Ticket {
   endTime: string;
 }
 
-const tickets: Ticket[] = [
+const tickets: TicketType[] = [
   {
     id: 0,
     name: "Jakub Wajstak",
@@ -81,21 +94,40 @@ const tickets: Ticket[] = [
 ];
 
 const UserView = () => {
-  return (
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const params = useParams();
+
+  const { data } = useQuery("organisation", () =>
+    axios.get(`/organisations/${params.id}`)
+  );
+
+  const content = React.useMemo(() => {
+    if (data) {
+      const organisation = data.data;
+
+      return {
+        name: organisation.name,
+        usersCount: organisation.users.length,
+        ownerName: `${organisation.owner.name} ${organisation.owner.surname}`,
+      };
+    }
+  }, [data]);
+
+  return content ? (
     <Container py={5} maxW={"container.lg"}>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between">
-          <Heading as={"h2"}>Nazwa firmy (gdzie są bakusie?!?)</Heading>
+          <Heading as={"h2"}>Nazwa firmy {content.name}</Heading>
         </Flex>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
             title={"Owner"}
-            stat={"Gdzie są bakusie"}
+            stat={content.ownerName}
             icon={<StarIcon width={"2.5em"} height={"2.5em"} />}
           />
           <StatsCard
             title={"Członkowie"}
-            stat={"61"}
+            stat={content.usersCount}
             icon={<BsPerson size={"3em"} />}
           />
           <StatsCard
@@ -105,13 +137,11 @@ const UserView = () => {
           />
         </SimpleGrid>
         <Flex justify="right">
-          {" "}
           <Button
             rightIcon={<BellIcon />}
             color={"gray.100"}
             bg={"purple.600"}
-            as={"a"}
-            href={"#"}
+            onClick={onOpen}
             _hover={{
               bg: "purple.700",
             }}
@@ -120,14 +150,18 @@ const UserView = () => {
           </Button>
         </Flex>
       </Flex>
-
+      <AddTicketsModal
+        isOpen={isOpen}
+        onClose={onClose}
+        organisationId={parseInt(params.id as string)}
+      />
       <Flex flexDirection="column" gap={"10px"}>
         {tickets.map((ticket) => (
           <Ticket key={ticket.id} {...ticket} />
         ))}
       </Flex>
     </Container>
-  );
+  ) : null;
 };
 
 export default UserView;
