@@ -51,7 +51,7 @@ function StatsCard(props: StatsCardProps) {
 interface Ticket {
   id: number;
   title: string;
-  organizationName: string;
+  name: string;
   startTime: string;
   endTime: string;
 }
@@ -59,22 +59,22 @@ interface Ticket {
 const tickets: Ticket[] = [
   {
     id: 0,
+    name: "Jakub Wajstak",
     title: "Wyjazd na wakacje",
-    organizationName: "Organizacja 1",
     startTime: "2022-12-14T11:45:00.000Z",
     endTime: "2022-12-16T12:34:00.000Z",
   },
   {
     id: 1,
     title: "Wyjazd do rodziny",
-    organizationName: "Organizacja 2",
+    name: "Marcin Sobota",
     startTime: "2022-12-14T11:45:00.000Z",
     endTime: "2022-12-16T12:34:00.000Z",
   },
   {
     id: 2,
     title: "Wyjazd na pogrzeb",
-    organizationName: "Organizacja 3",
+    name: "Marcin Niedziela",
     startTime: "2022-12-14T11:45:00.000Z",
     endTime: "2022-12-16T12:34:00.000Z",
   },
