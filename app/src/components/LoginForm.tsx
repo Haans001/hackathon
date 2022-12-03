@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   const { login } = useAuth();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await login({
@@ -51,46 +51,48 @@ const LoginForm = () => {
           minH={"300px"}
           align="center"
         >
-          <Stack spacing={4}>
-            <FormControl id="login">
-              <FormLabel>Adres e-mail</FormLabel>
-              <Input
-                autoFocus
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                minW="380px"
-              />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Hasło</FormLabel>
-              <Input
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-            <Stack spacing={10}>
-              <Button
-                marginTop={1}
-                bg={"purple.600"}
-                color={"white"}
-                _hover={{
-                  bg: "purple.700",
-                }}
-                onClick={handleSubmit}
-              >
-                Zaloguj się
-              </Button>
-              {error && (
-                <Text fontSize="sm" color="tomato">
-                  {error}
-                </Text>
-              )}
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              <FormControl id="login">
+                <FormLabel>Adres e-mail</FormLabel>
+                <Input
+                  autoFocus
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  minW="380px"
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Hasło</FormLabel>
+                <Input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormControl>
+              <Stack spacing={10}>
+                <Button
+                  marginTop={1}
+                  bg={"purple.600"}
+                  color={"white"}
+                  _hover={{
+                    bg: "purple.700",
+                  }}
+                  type="submit"
+                >
+                  Zaloguj się
+                </Button>
+                {error && (
+                  <Text fontSize="sm" color="tomato">
+                    {error}
+                  </Text>
+                )}
+              </Stack>
             </Stack>
-          </Stack>
+          </form>
         </Flex>
       </Stack>
     </Flex>

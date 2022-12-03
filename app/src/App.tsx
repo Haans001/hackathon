@@ -47,7 +47,13 @@ function App() {
               <Route
                 element={
                   <ProtectedRoute>
-                    <h1>dashboard</h1>
+                    <div
+                      style={{
+                        paddingTop: "100px",
+                      }}
+                    >
+                      Panel
+                    </div>
                   </ProtectedRoute>
                 }
                 path="/panel"

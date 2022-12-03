@@ -1,7 +1,11 @@
 import * as React from "react";
 import { useMutation } from "react-query";
 import axios from "../../config/axios";
-import AuthContext, { LoginData, SingupData } from "./AuthContext";
+import AuthContext, {
+  AuthContextType,
+  LoginData,
+  SingupData,
+} from "./AuthContext";
 
 const AuthProvider: React.FunctionComponent<{
   children?: React.ReactNode;
@@ -18,14 +22,19 @@ const AuthProvider: React.FunctionComponent<{
 
   const [isVeryfing, setIsVeryfing] = React.useState(true);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
   React.useEffect(() => {
     axios
-      .get("/auth/verify")
+      .get("/auth/validate")
       .then((res) => {
         setUser(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
         setUser(null);
       })
       .finally(() => {
@@ -61,11 +70,12 @@ const AuthProvider: React.FunctionComponent<{
     [_login]
   );
 
-  const value = React.useMemo(
+  const value = React.useMemo<AuthContextType>(
     () => ({
       user,
       signup,
       login,
+      logout,
     }),
     [login, signup, user]
   );

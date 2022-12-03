@@ -114,7 +114,7 @@ export default function Navbar(props: ButtonProps) {
                 ></IconButton>
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
+                <MenuItem onClick={}>Wyloguj się</MenuItem>
                 <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
                 <MenuItem>Link 3</MenuItem>
