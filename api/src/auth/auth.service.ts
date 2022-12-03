@@ -30,7 +30,7 @@ export class AuthService {
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
         if (e.code === 'P2002') {
-          throw new ForbiddenException('User with this email already exists');
+          throw new ForbiddenException('Użytownik z tym emailem już istnieje');
         }
       }
     }
@@ -40,13 +40,13 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({ where: { email: email } });
 
     if (!user) {
-      throw new ForbiddenException('User with this email does not exist');
+      throw new ForbiddenException('Uzytkownik nie istnieje');
     }
 
     const valid = await argon2.verify(user.hash, password);
 
     if (!valid) {
-      throw new ForbiddenException('Invalid password');
+      throw new ForbiddenException('Niepoprawne hasło');
     }
 
     delete user.hash;

@@ -91,7 +91,7 @@ const Ticket = (props: any) => {
                       })
                     }
                   >
-                    Approve
+                    Zaakcpetuj
                   </Button>
                   <Button
                     onClick={() =>
@@ -105,15 +105,15 @@ const Ticket = (props: any) => {
                       bg: "red.700",
                     }}
                   >
-                    Reject
+                    Odrzuć
                   </Button>
                 </Stack>
               ) : props.approved === null ? (
-                <Text color={"yellow.700"}>Pending</Text>
+                <Text color={"yellow.700"}>W toku</Text>
               ) : props.approved ? (
-                <Text color="green.700">Approved</Text>
+                <Text color="green.700">Zaackeptowany</Text>
               ) : (
-                <Text color="red.700">Rejected</Text>
+                <Text color="red.700">Odrzucony</Text>
               )}
               <Button
                 h="42px"

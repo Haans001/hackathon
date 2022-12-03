@@ -12,7 +12,6 @@ const PublicRoute = ({ children }: { children: any }) => {
       </>
     );
   } else {
-    console.log("user", user);
     return <Navigate to="/panel" replace />;
   }
 };
