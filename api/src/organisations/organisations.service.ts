@@ -95,6 +95,13 @@ export class OrganisationsService {
             },
           },
         },
+        owner: {
+          select: {
+            name: true,
+            surname: true,
+            id: true,
+          },
+        },
       },
     });
 
