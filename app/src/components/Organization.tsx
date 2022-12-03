@@ -18,6 +18,10 @@ const Organization = (props: any) => {
                         w='100%'
                         bg={useColorModeValue('white', 'purple.700')}
                         rounded='md'
+                        boxShadow={useColorModeValue(
+                            '8px 8px 32px -20px rgba(66, 68, 90, 1)',
+                            '8px 8px 24px -6px rgba(66, 68, 90, 1)'
+                        )}
                     >
                         <Flex>
                             <Flex
