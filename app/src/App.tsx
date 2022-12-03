@@ -2,6 +2,7 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Dashboard from "./components/Dashboard";
 import LoginForm from "./components/LoginForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -52,7 +53,7 @@ function App() {
                         paddingTop: "100px",
                       }}
                     >
-                      Panel
+                      <Dashboard></Dashboard>
                     </div>
                   </ProtectedRoute>
                 }
