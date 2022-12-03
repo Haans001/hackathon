@@ -76,7 +76,17 @@ export class OrganisationsService {
         },
       },
       include: {
-        users: true,
+        users: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                surname: true,
+              },
+            },
+          },
+        },
       },
     });
 
