@@ -30,10 +30,14 @@ import {
 } from "@chakra-ui/react";
 import { BsMoonStarsFill, BsSun } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
+import { useAuth } from "../providers/AuthProvider";
 
 export default function Navbar(props: ButtonProps) {
   const { isOpen, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const { logout } = useAuth();
+
   return (
     <Box pos="fixed" w="100%">
       <Flex
@@ -114,7 +118,7 @@ export default function Navbar(props: ButtonProps) {
                 ></IconButton>
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={}>Wyloguj się</MenuItem>
+                <MenuItem onClick={() => logout()}>Wyloguj się</MenuItem>
                 <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
                 <MenuItem>Link 3</MenuItem>

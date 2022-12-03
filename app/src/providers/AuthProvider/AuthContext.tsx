@@ -16,6 +16,7 @@ export interface AuthContextType {
   user: any;
   signup: (data: SingupData) => Promise<any>;
   login: (data: LoginData) => Promise<any>;
+  logout: () => void;
 }
 
 const AuthContext = React.createContext<AuthContextType>({
@@ -24,6 +25,9 @@ const AuthContext = React.createContext<AuthContextType>({
     throw new Error("Not implemented.");
   },
   login: () => {
+    throw new Error("Not implemented.");
+  },
+  logout: () => {
     throw new Error("Not implemented.");
   },
 });
