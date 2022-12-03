@@ -20,6 +20,7 @@ model User {
   updatedAt     DateTime               @updatedAt
   tickets       Ticket[]
   organisations OrganisationsOnUsers[]
+  Organisation  Organisation[]
 }
 
 model Ticket {
@@ -37,7 +38,8 @@ model Ticket {
 
 model Organisation {
   id        Int                    @id @default(autoincrement())
-  owner     Int
+  ownerId   Int
+  owner     User                   @relation(fields: [ownerId], references: [id])
   name      String
   createdAt DateTime               @default(now())
   updatedAt DateTime               @updatedAt

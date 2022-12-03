@@ -7,7 +7,6 @@ export class TicketService {
   constructor(private readonly prisma: PrismaService) {}
 
   async AddTicket(userid: number, dto: TicketDto) {
-    console.log(dto);
     const ticket = await this.prisma.ticket.create({
       data: {
         title: dto.title,
@@ -44,7 +43,6 @@ export class TicketService {
         },
       },
     });
-    console.log(users);
     return users;
   }
 }

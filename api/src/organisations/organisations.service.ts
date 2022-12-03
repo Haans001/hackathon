@@ -9,7 +9,11 @@ export class OrganisationsService {
     const data = await this.prisma.organisation.create({
       data: {
         name,
-        owner: userId,
+        owner: {
+          connect: {
+            id: userId,
+          },
+        },
         users: {
           create: [
             {
@@ -37,11 +41,15 @@ export class OrganisationsService {
         id: organisationId,
       },
       select: {
-        owner: true,
+        owner: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
 
-    if (organisation.owner !== userId) {
+    if (organisation.owner.id !== userId) {
       throw new Error('You are not the owner of this organisation');
     }
 
@@ -85,6 +93,13 @@ export class OrganisationsService {
                 surname: true,
               },
             },
+          },
+        },
+        owner: {
+          select: {
+            name: true,
+            surname: true,
+            id: true,
           },
         },
       },

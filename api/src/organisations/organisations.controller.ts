@@ -34,6 +34,7 @@ export class OrganisationsController {
     const organisations = await this.organisationsService.getOrganisations(
       userId,
     );
+    console.log(organisations);
     return organisations;
   }
 
