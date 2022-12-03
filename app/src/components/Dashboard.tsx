@@ -73,19 +73,21 @@ const Dashboard = () => {
   return (
     <>
       <Flex justify="center" align="center" pb="20px">
-        <FormControl w="40%">
-          <FormLabel textAlign="center" fontSize="32px">
-            Wyszukiwarka
-          </FormLabel>
-          <Input
-            autoFocus
-            value={term}
-            onChange={handleForm}
-            placeholder="Wyszukaj swoja organizacje"
-          />
-        </FormControl>
+        {organizations?.length === 0 ? null : (
+          <FormControl w="40%">
+            <FormLabel textAlign="center" fontSize="32px">
+              Wyszukiwarka
+            </FormLabel>
+            <Input
+              autoFocus
+              value={term}
+              onChange={handleForm}
+              placeholder="Wyszukaj swoja organizacje"
+            />
+          </FormControl>
+        )}
       </Flex>
-      {organizations.length === 0 ? (
+      {organizations?.length === 0 ? (
         <NoOrganizationElement />
       ) : (
         organizations?.length &&
