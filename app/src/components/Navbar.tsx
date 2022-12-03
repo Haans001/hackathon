@@ -360,24 +360,12 @@ const NAV_ITEMS: NavItem[] = [
             {
                 label: 'Zarządzaj organizacjami',
                 subLabel: 'Miej kontrolę nad organizacjami!',
-                href: '#',
+                href: '/',
             },
         ],
     },
     {
-        label: 'Zadania',
-        children: [
-            {
-                label: 'Lista zadań',
-                subLabel: 'Sprawdź swoje zadania',
-                href: '#',
-            },
-            {
-                label: 'Pomodoro',
-                subLabel:
-                    'Skorzystaj z metody pomodoro do zwiększenia efektywności Twojej pracy',
-                href: '#',
-            },
-        ],
+        label: 'Kontakt',
+        href: '/kontakt',
     },
 ]

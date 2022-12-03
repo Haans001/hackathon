@@ -2,6 +2,7 @@ import { ChakraProvider, theme } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import Contact from './components/Contact'
 import CreateOrganisation from './components/CreateOrganisation'
 import Dashboard from './components/Dashboard'
 import LoginForm from './components/LoginForm'
@@ -83,6 +84,14 @@ function App() {
                                     </ProtectedRoute>
                                 }
                                 path='/profil'
+                            />
+                            <Route
+                                element={
+                                    <ProtectedRoute>
+                                        <Contact />
+                                    </ProtectedRoute>
+                                }
+                                path='/kontakt'
                             />
                             <Route path='*' element={<Page404 />} />
                         </Routes>
