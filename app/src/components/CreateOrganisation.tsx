@@ -7,21 +7,18 @@ import {
     Input,
     Stack,
     useColorModeValue,
-    Avatar,
-    AvatarBadge,
-    IconButton,
-    Center,
-    useColorMode,
 } from '@chakra-ui/react'
-import { SmallCloseIcon } from '@chakra-ui/icons'
-import { FaRegUser } from 'react-icons/fa'
-import userPNG from '../assets/user.png'
-import userLightPNG from '../assets/userLight.png'
+
 import { useState } from 'react'
 
 export default function CreateOrganisation(): JSX.Element {
     const [nameInput, setNameInput] = useState('')
-    const { colorMode, toggleColorMode } = useColorMode()
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(nameInput)
+    }
+
     return (
         <Flex
             minH={'100vh'}
@@ -29,7 +26,7 @@ export default function CreateOrganisation(): JSX.Element {
             justify={'center'}
             bg={useColorModeValue('gray.50', 'gray.800')}
         >
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Stack
                     spacing={6}
                     w={'full'}
