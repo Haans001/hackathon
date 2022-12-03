@@ -66,7 +66,12 @@ export class OrganisationsController {
   async upvote(
     @GetCurrentUser('sub') userId: number,
     @Body('ticketId') ticketId: number,
+    @Body('status') status: boolean,
   ) {
-    return await this.organisationsService.UpvoteTicket(userId, ticketId);
+    return await this.organisationsService.UpvoteTicket(
+      userId,
+      ticketId,
+      status,
+    );
   }
 }
