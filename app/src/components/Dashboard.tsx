@@ -47,10 +47,6 @@ const Dashboard = () => {
     },
   ];
 
-  const orgElements = organizations.map((organization) => (
-    <Organization key={organization.id} {...organization} />
-  ));
-
   const [term, setTerm] = useState("");
 
   const handleForm = (e: any) => {
@@ -75,7 +71,7 @@ const Dashboard = () => {
       </Flex>
       {organizations
         .filter((org) =>
-          org.organizationName.toLocaleLowerCase().includes(term)
+          org.organizationName.toLocaleLowerCase().includes(term.toLowerCase())
         )
         .map((organization) => (
           <Organization key={organization.id} {...organization} />
