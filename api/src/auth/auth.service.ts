@@ -64,6 +64,8 @@ export class AuthService {
       return null;
     }
 
+    delete user.hash;
+
     return user;
   }
 

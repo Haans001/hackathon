@@ -16,6 +16,23 @@ const AuthProvider: React.FunctionComponent<{
     axios.post("/auth/signin", data)
   );
 
+  const [isVeryfing, setIsVeryfing] = React.useState(true);
+
+  React.useEffect(() => {
+    axios
+      .get("/auth/verify")
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setUser(null);
+      })
+      .finally(() => {
+        setIsVeryfing(false);
+      });
+  }, []);
+
   const signup = React.useCallback(
     async (data: SingupData) => {
       try {
@@ -53,6 +70,10 @@ const AuthProvider: React.FunctionComponent<{
     [login, signup, user]
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!isVeryfing && children}
+    </AuthContext.Provider>
+  );
 };
 export default AuthProvider;
