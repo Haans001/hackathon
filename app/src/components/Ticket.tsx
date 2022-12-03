@@ -20,7 +20,7 @@ const Ticket = (props: any) => {
               <Text>
                 Dodane przez: {props.user.name} {props.user.surname}
               </Text>
-              <Text>{`od ${start.getDay()}-${start.getMonth()}-${start.getFullYear()}r. do ${end.getDay()}-${end.getMonth()}-${end.getFullYear()}r.`}</Text>
+              <Text>{`od ${start.getDay()}-${start.getMonth()}-${start.getFullYear()}r. ${start.getHours()}:${start.getMinutes()} do ${end.getDay()}-${end.getMonth()}-${end.getFullYear()}r. ${end.getHours()}:${end.getMinutes()}`}</Text>
             </Flex>
             <Flex alignContent={"center"} h="100%" align={"center"}>
               <Button
