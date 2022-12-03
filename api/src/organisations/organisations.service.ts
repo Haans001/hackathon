@@ -49,6 +49,7 @@ export class OrganisationsService {
             title: true,
             approved: true,
             id: true,
+            votes: true,
             user: {
               select: {
                 id: true,
