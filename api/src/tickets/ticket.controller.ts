@@ -5,7 +5,7 @@ import { GetCurrentUser } from 'src/common/decorators';
 import { TicketDto } from './dto';
 import { TicketService } from './ticket.service';
 
-@Controller('ticket')
+@Controller('tickets')
 export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
   //Create ticket dto
@@ -17,7 +17,7 @@ export class TicketController {
   ) {
     return await this.ticketService.AddTicket(userId, dto);
   }
-  @Get('all')
+  @Get('getUserTickets')
   async GetTickets(@GetCurrentUser('sub') userId: number) {
     return await this.ticketService.getUserTickets(userId);
   }

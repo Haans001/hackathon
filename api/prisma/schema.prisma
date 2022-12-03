@@ -11,25 +11,47 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  hash      String
-  name      String?
-  surname   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Ticket Ticket[]
-
+  id            Int                    @id @default(autoincrement())
+  email         String                 @unique
+  hash          String
+  name          String?
+  surname       String?
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  tickets       Ticket[]
+  organisations OrganisationsOnUsers[]
 }
 
 model Ticket {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  startTime   DateTime
-  endTime     DateTime
-  createdAt   DateTime @default(now())
- 
-  userId  Int
-  user    User   @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  title     String
+  startTime DateTime
+  endTime   DateTime
+  createdAt DateTime @default(now())
+
+  userId         Int
+  user           User         @relation(fields: [userId], references: [id])
+  organisationId Int
+  organisation   Organisation @relation(fields: [organisationId], references: [id])
+}
+
+model Organisation {
+  id        Int                    @id @default(autoincrement())
+  owner     Int
+  name      String
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+  users     OrganisationsOnUsers[]
+  tickets   Ticket[]
+}
+
+model OrganisationsOnUsers {
+  organisation   Organisation @relation(fields: [organisationId], references: [id])
+  organisationId Int
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@id([organisationId, userId])
 }

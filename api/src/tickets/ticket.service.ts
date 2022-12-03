@@ -11,9 +11,13 @@ export class TicketService {
     const ticket = await this.prisma.ticket.create({
       data: {
         title: dto.title,
-        description: dto.description,
         startTime: dto.startTime,
         endTime: dto.endTime,
+        organisation: {
+          connect: {
+            id: dto.organisationId,
+          },
+        },
         user: {
           connect: {
             id: userid,
@@ -28,6 +32,16 @@ export class TicketService {
     const users = this.prisma.ticket.findMany({
       where: {
         userId: userid,
+      },
+      select: {
+        title: true,
+        startTime: true,
+        endTime: true,
+        organisation: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
     console.log(users);
