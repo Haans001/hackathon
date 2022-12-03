@@ -52,6 +52,7 @@ export default function SignupCard() {
                                 <FormControl id='firstName' isRequired>
                                     <FormLabel>Imię</FormLabel>
                                     <Input
+                                        autoFocus
                                         type='text'
                                         name='name'
                                         value={name}

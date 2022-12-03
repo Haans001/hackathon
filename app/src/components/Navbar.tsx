@@ -14,6 +14,11 @@ import {
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuDivider,
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -86,11 +91,29 @@ export default function Navbar() {
                     direction={'row'}
                     spacing={6}
                 >
-                    <IconButton
-                        aria-label='user-profile'
-                        borderRadius='3xl'
-                        icon={<FaRegUser />}
-                    ></IconButton>
+                    <Flex alignItems={'center'}>
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}
+                            >
+                                <IconButton
+                                    aria-label='user-profile'
+                                    borderRadius='3xl'
+                                    icon={<FaRegUser />}
+                                ></IconButton>
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>Link 1</MenuItem>
+                                <MenuItem>Link 2</MenuItem>
+                                <MenuDivider />
+                                <MenuItem>Link 3</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </Flex>
                 </Stack>
             </Flex>
 
