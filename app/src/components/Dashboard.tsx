@@ -1,7 +1,15 @@
-import { Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import * as React from "react";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import axios from "../config/axios";
 import Organization from "./Organization";
 
@@ -13,6 +21,19 @@ interface OrganizationType {
   usersCount: number;
   logo: string;
 }
+
+const NoOrganizationElement = () => {
+  return (
+    <Flex w={"100%"} justifyContent="center" align="center">
+      <Flex w={"30%"} flexDirection={"column"} justify={"center"}>
+        <Text>Nie jestes w zadnej organizacji. Stworz swoją!</Text>
+        <Link to="../stworz-organizacje">
+          <Button>Kliknij tu!</Button>
+        </Link>
+      </Flex>
+    </Flex>
+  );
+};
 
 const Dashboard = () => {
   const [term, setTerm] = useState("");
@@ -64,7 +85,10 @@ const Dashboard = () => {
           />
         </FormControl>
       </Flex>
-      {organizations?.length &&
+      {organizations.length === 0 ? (
+        <NoOrganizationElement />
+      ) : (
+        organizations?.length &&
         organizations
           .filter((org) =>
             org.organizationName
@@ -73,7 +97,8 @@ const Dashboard = () => {
           )
           .map((organization) => (
             <Organization key={organization.id} {...organization} />
-          ))}
+          ))
+      )}
     </>
   );
 };
